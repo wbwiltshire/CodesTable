@@ -1,0 +1,22 @@
+﻿@model CodesTable.Data.POCO.Project
+
+@{
+     ViewBag.Title = "Details";
+}
+
+<div class="row">
+     <div class="col-md-12">
+          <h4>@ViewData["Title"]</h4>
+     </div>
+</div>
+<div class="row">
+     <div class="col-md-12">
+          <partial name="_PartialDisplayForm" />
+     </div>
+</div>
+<div class="row">
+     <div class="col-md-12">
+          <a class="btn btn-primary btn-sm" href="Edit\@Model.Id">Edit</a>
+          <a class="btn btn-danger btn-sm" id="cancel" name="cancel" href="/Project/Index">Back</a>
+     </div>
+</div>

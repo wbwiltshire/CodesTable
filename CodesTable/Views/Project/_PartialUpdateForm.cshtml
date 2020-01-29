@@ -1,0 +1,67 @@
+﻿@using CodesTable.Data;
+@using CodesTable.Data.POCO;
+@model CodesTable.Models.ProjectView
+
+     <form id="form-content" class="form-horizontal bg-primary img-rounded col-md-12" method="post">
+          @Html.AntiForgeryToken()
+          <input type="hidden" name="Project.Id" value="@Model.Project.Id" />
+          <input type="hidden" name="Project.Active" value="@Model.Project.Active.ToString()" />
+          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          <div class="form-group row">
+               <label asp-for="Project.Name" class="col-md-2 control-label">@Html.DisplayNameFor(m => m.Project.Name):</label>
+               <div class="col-md-3">
+                    <input asp-for="Project.Name" type="text" class="form-control form-control-sm" value='@Model.Project.Name' title="Input project name" />
+                    <span asp-validation-for="Project.Name" class="text-danger"></span>
+               </div>
+          </div>
+          <div class="form-group row">
+               <label asp-for="Project.TypeId" class="col-md-2 control-label">Type:</label>
+               <div class="col-md-3">
+                    <select name="Project.TypeId" class="form-control form-control-sm" id="Project.TypeId">
+                         @foreach (Code p in Model.ProjectTypes)
+                         {
+                              if (Model.Project.TypeId == p.Id)
+                              {
+                                   <option value="@p.Id" selected="selected">@p.Name</option>
+                              }
+                              else
+                              {
+                                   <option value="@p.Id">@p.Name</option>
+                              }
+                         }
+                    </select>
+               </div>
+          </div>
+          <div class="form-group row">
+               <label asp-for="Project.ClientId" class="col-md-2 control-label">@Html.DisplayNameFor(m => m.Project.ClientId):</label>
+               <div class="col-md-3">
+                    <input asp-for="Project.ClientId" type="text" class="form-control form-control-sm" value='@Model.Project.ClientId' title="Input client ID" />
+                    <span asp-validation-for="Project.ClientId" class="text-danger"></span>
+               </div>
+          </div>
+          <div class="form-group row">
+               <label asp-for="Project.StatusId" class="col-md-2 control-label">Status:</label>
+               <div class="col-md-3">
+                    <select name="Project.StatusId" class="form-control form-control-sm" id="Project.StatusId">
+                         @foreach (Code s in Model.StatusTypes)
+                         {
+                              if (Model.Project.StatusId == s.Id)
+                              {
+                                   <option value="@s.Id" selected="selected">@s.Name</option>
+                              }
+                              else
+                              {
+                                   <option value="@s.Id">@s.Name</option>
+                              }
+                         }
+                    </select>
+               </div>
+          </div>
+          <div class="form-group row">
+               <div class="col-md-10 col-md-push-1">
+                    <input id="submit" class="btn btn-success btn-sm" type="submit" value="Save" />
+                    <a class="btn btn-danger btn-sm" id="cancel" name="cancel" href="/Project/Index">Cancel</a>
+               </div>
+          </div>
+     </form>
+

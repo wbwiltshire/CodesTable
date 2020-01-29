@@ -1,0 +1,42 @@
+﻿@using CodesTable.Data;
+@using CodesTable.Data.POCO;
+@model CodesTable.Models.CodeView
+
+<form id="form-content" class="form-horizontal bg-primary img-rounded col-md-12" method="post">
+     @Html.AntiForgeryToken()
+     <input type="hidden" name="Code.Id" value="@Model.Code.Id" />
+     <input type="hidden" name="Code.Active" value="@Model.Code.Active.ToString()" />
+     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+     <div class="form-group row">
+          <label asp-for="Code.Name" class="col-md-2 control-label">@Html.DisplayNameFor(m => m.Code.Name):</label>
+          <div class="col-md-3">
+               <input asp-for="Code.Name" type="text" class="form-control form-control-sm" value='@Model.Code.Name' title="Input code name" />
+               <span asp-validation-for="Code.Name" class="text-danger"></span>
+          </div>
+     </div>
+     <div class="form-group row">
+          <label asp-for="Code.CategoryId" class="col-md-2 control-label">Category:</label>
+          <div class="col-md-3">
+               <select name="Code.CategoryId" class="form-control form-control-sm" id="Code.CategoryId">
+                    @foreach (CodeCategory c in Model.CodeCategories)
+                    {
+                         if (Model.Code.CategoryId == c.Id)
+                         {
+                              <option value="@c.Id" selected="selected">@c.Name</option>
+                         }
+                         else
+                         {
+                              <option value="@c.Id">@c.Name</option>
+                         }
+                    }
+               </select>
+          </div>
+     </div>
+     <div class="form-group row">
+          <div class="col-md-10 col-md-push-1">
+               <input id="submit" class="btn btn-success btn-sm" type="submit" value="Save" />
+               <a class="btn btn-danger btn-sm" id="cancel" name="cancel" href="/Code/Index">Cancel</a>
+          </div>
+     </div>
+</form>
+

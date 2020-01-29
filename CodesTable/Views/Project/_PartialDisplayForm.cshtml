@@ -1,0 +1,34 @@
+﻿@model CodesTable.Data.POCO.Project
+
+<div class="row">
+     <form id="display-content" class="col-md-6 bg-primary rounded">
+          <div>
+               <label asp-for="Name" class="col-md-3 text-right">@Html.DisplayNameFor(m => m.Name):</label>
+               <label class="text-normal">@Model.Name</label>
+          </div>
+          <div>
+               <label asp-for="ProjectType.Name" class="col-md-3 text-right">Type:</label>
+               <label class="text-normal">@Model.ProjectType.Name</label>
+          </div>
+          <div>
+               <label asp-for="ClientId" class="col-md-3 text-right">Client Id:</label>
+               <label class="text-normal">@Model.ClientId</label>
+          </div>
+          <div>
+               <label asp-for="Status.Name" class="col-md-3 text-right">Type:</label>
+               <label class="text-normal">@Model.Status.Name</label>
+          </div>
+          <div>
+               <label asp-for="Active" class="col-md-3 text-right">@Html.DisplayNameFor(m => m.Active):</label>
+               <label class="text-normal">@Model.Active</label>
+          </div>
+          <div>
+               <label asp-for="ModifiedDt" class="col-md-3 text-right">@Html.DisplayNameFor(m => m.ModifiedDt):</label>
+               <label class="text-normal">@String.Format("{0:g}", Model.ModifiedDt)</label>
+          </div>
+          <div>
+               <label asp-for="CreateDt" class="col-md-3 text-right">@Html.DisplayNameFor(m => m.CreateDt):</label>
+               <label class="text-normal">@String.Format("{0:g}", Model.CreateDt)</label>
+          </div>
+     </form>
+</div>

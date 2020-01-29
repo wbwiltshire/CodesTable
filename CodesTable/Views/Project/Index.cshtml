@@ -1,0 +1,82 @@
+﻿@using CodesTable.Data
+@using CodesTable.Data.POCO
+@model IPager<CodesTable.Data.POCO.Project>
+@{  }
+
+@{
+     ViewData["Title"] = "Projects";
+}
+<div class="row">
+     <div class="col-md-3">
+          <h4>@ViewData["Title"]</h4>
+     </div>
+</div>
+
+<div class="row">
+     <div class="col-md-12">
+          <a id="add" class="btn btn-primary btn-sm" href="/Project/Create" )>Add</a>
+          <a id="refresh" class="btn btn-primary btn-sm" href="#" )>Refresh</a>
+     </div>
+</div>
+
+<div class="row">
+     <div class="col-md-12">
+          <table id="ProjectTable" ctTotalItems="@Model.RowCount" class="table table-striped tabled-bordered table-sm table-hover">
+               <thead>
+                    <tr class="colHeaders">
+                         <th id="Name">Name</th>
+                         <th id="ProjectType">Project Type</th>
+                         <th id="ClientId">Client</th>
+                         <th id="Status">Status</th>
+                         <th id="Actions" colspan="3">Actions</th>
+                    </tr>
+               </thead>
+               <tbody id="ProjectList">
+                    @foreach (CodesTable.Data.POCO.Project p in Model.Entities)
+                    {
+                    <tr id="@p.Id" class="contextMenu-target">
+                         <td>@p.Name</td>
+                         <td>@p.ProjectType.Name</td>
+                         <td>@p.ClientId</td>
+                         <td>@p.Status.Name</td>
+                         <td class="action"><a href="/Project/@p.Id" data-toggle="tooltip" title="Details"><i class="fa fa-file-text-o" aria-hidden="true"></i></a></td>
+                         <td class="action"><a href="/Project/Edit/@p.Id" data-toggle="tooltip" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                         <td class="action"><a href="/Project/Delete/@p.Id" data-toggle="tooltip" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                    </tr>
+                    }
+                    @if (Model.Entities.Count == 0)
+                    {
+                         <tr id="noRecordsFound"><td class="lead text-left text-danger" colspan="4">No Records Found!</td></tr>
+                    }
+               </tbody>
+          </table>
+     </div>
+</div>
+
+<div class="row">
+     <div class="col-md-12">
+          <br />
+     </div>
+</div>
+<script id="projectListHGrid" type="text/x-handlebars-template">
+     {{#ProjectList}}
+     <tr id="{{id}}" class="contextMenu-target">
+          <td>{{name}}</td>
+          <td>{{projectType.name}}</td>
+          <td>{{clientId}}</td>
+          <td>{{status.name}}</td>
+          <td class="action"><a href="/Task/{{id}}" data-toggle="tooltip" title="Details"><i class="fa fa-file-text-o" aria-hidden="true"></i></a></td>
+          <td class="action"><a href="/Task/Edit/{{id}}" data-toggle="tooltip" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+          <td class="action"><a href="/Task/Delete/{{id}}" data-toggle="tooltip" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+     </tr>
+     {{/ProjectList}}
+</script>
+@section scripts {
+     <script type="text/javascript" src="~/lib/moment/moment.js"></script>
+     <script type="text/javascript" src="~/lib/handlebars/handlebars.js"></script>
+     <script type="text/javascript" src="~/lib/turbotables.js"></script>
+     <script type="text/javascript" src="~/js/ajaxcommon.js"></script>
+     <script type="text/javascript" src="~/js/handlebarscommon.js"></script>
+     <script type="text/javascript" src="~/js/project.js"></script>
+}
+
