@@ -29,6 +29,8 @@ namespace CodesTable.Data.Repository
 		private const string ADD_PROC = "uspAddCode";
 		private const string UPDATE_PROC = "uspUpdateCode";
 
+		private const string FINDALLBYCATEGORY_STMT = "SELECT Id,CategoryId,Name,Active,ModifiedDt,CreateDt FROM Code WHERE CategoryId=@cat AND Active=1";
+
 		private ILogger logger;
 
 		#region ctor
@@ -116,6 +118,20 @@ namespace CodesTable.Data.Repository
 			CMDText = FINDALLCOUNT_STMT;
 			pager.RowCount = await base.FindAllCount();
 			return pager;
+		}
+		#endregion
+
+		#region FindAllByCategory(int)
+		public async Task<ICollection<Code>> FindAllByCategory(int category) 
+		{
+			IList<SqlParameter> parms = new List<SqlParameter>();
+
+			CMDText = FINDALLBYCATEGORY_STMT;
+			CMDText += ORDERBY_STMT + OrderBy;
+			MapToObject = new CodeMapToObject(logger);
+			parms.Add(new SqlParameter("@cat", category));
+			return await base.FindAll(parms);
+
 		}
 		#endregion
 

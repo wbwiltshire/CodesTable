@@ -94,7 +94,7 @@ namespace CodesTable.Controllers
                     codeRepo = new CodeRepository(settings, logger, dbc);
 
                     view.Code = await codeRepo.FindByPKView(new PrimaryKey() { Key = id, IsIdentity = true });
-                    view.CodeCategories = CategoryTypeHelper.ToPickList();
+                    view.CodeCategories = CodeCategory.GetList();
                 }
             }
             catch (Exception ex)
@@ -130,7 +130,7 @@ namespace CodesTable.Controllers
                     else
                     {
                         // Only get here if couldn't update code
-                        view.CodeCategories = CategoryTypeHelper.ToPickList();
+                        view.CodeCategories = CodeCategory.GetList();
 
                         return View("Edit", view);
                     }
@@ -157,7 +157,7 @@ namespace CodesTable.Controllers
 
             try
             {
-                view.CodeCategories = CategoryTypeHelper.ToPickList();
+                view.CodeCategories = CodeCategory.GetList();
             }
             catch (Exception ex)
             {
@@ -187,7 +187,7 @@ namespace CodesTable.Controllers
                         return RedirectToAction("Index", "Code");
                     }
 
-                    view.CodeCategories = CategoryTypeHelper.ToPickList();
+                    view.CodeCategories = CodeCategory.GetList();
                     return View("Create", view);
                 }
             }

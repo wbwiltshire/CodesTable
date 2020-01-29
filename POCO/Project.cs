@@ -17,7 +17,6 @@ namespace CodesTable.Data.POCO
 
     public class Project
     {
-
         public PrimaryKey PK { get; set; }
         public int Id
         {

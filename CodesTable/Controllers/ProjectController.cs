@@ -95,8 +95,8 @@ namespace CodeTables.Web.UI.Controllers
                     codeRepo = new CodeRepository(settings, logger, dbc);
 
                     view.Project = await projectRepo.FindByPKView(new PrimaryKey() { Key = id, IsIdentity = true });
-                    view.ProjectTypes = (await codeRepo.FindAll()).Where(p => p.CategoryId == Constants.CategoryType.PROJECT_TYPE.Value()).ToList();
-                    view.StatusTypes = (await codeRepo.FindAll()).Where(p => p.CategoryId == Constants.CategoryType.STATUS.Value()).ToList();
+                    view.ProjectTypes = (await codeRepo.FindAllByCategory(CodeCategory.PROJECT_TYPE)).ToList();
+                    view.StatusTypes = (await codeRepo.FindAllByCategory(CodeCategory.STATUS)).ToList();
                 }
             }
             catch (Exception ex)
@@ -133,8 +133,8 @@ namespace CodeTables.Web.UI.Controllers
                     else
                     {
                         // Only get here if couldn't update project
-                        view.ProjectTypes = (await codeRepo.FindAll()).Where(p => p.CategoryId == Constants.CategoryType.PROJECT_TYPE.Value()).ToList();
-                        view.StatusTypes = (await codeRepo.FindAll()).Where(p => p.CategoryId == Constants.CategoryType.STATUS.Value()).ToList();
+                        view.ProjectTypes = (await codeRepo.FindAllByCategory(CodeCategory.PROJECT_TYPE)).ToList();
+                        view.StatusTypes = (await codeRepo.FindAllByCategory(CodeCategory.STATUS)).ToList();
 
                         return View("Edit", view);
                     }
@@ -163,8 +163,8 @@ namespace CodeTables.Web.UI.Controllers
                     codeRepo = new CodeRepository(settings, logger, dbc);
 
                     view.Project = new Project() { Active = true };
-                    view.ProjectTypes = (await codeRepo.FindAll()).Where(p => p.CategoryId == Constants.CategoryType.PROJECT_TYPE.Value()).ToList();
-                    view.StatusTypes = (await codeRepo.FindAll()).Where(p => p.CategoryId == Constants.CategoryType.STATUS.Value()).ToList();
+                    view.ProjectTypes = (await codeRepo.FindAllByCategory(CodeCategory.PROJECT_TYPE)).ToList();
+                    view.StatusTypes = (await codeRepo.FindAllByCategory(CodeCategory.STATUS)).ToList();
                 }
             }
             catch (Exception ex)
@@ -199,8 +199,8 @@ namespace CodeTables.Web.UI.Controllers
                     }
 
                     // Only get here if couldn't add project and all tasks
-                    view.ProjectTypes = (await codeRepo.FindAll()).Where(p => p.CategoryId == Constants.CategoryType.PROJECT_TYPE.Value()).ToList();
-                    view.StatusTypes = (await codeRepo.FindAll()).Where(p => p.CategoryId == Constants.CategoryType.STATUS.Value()).ToList();
+                    view.ProjectTypes = (await codeRepo.FindAllByCategory(CodeCategory.PROJECT_TYPE)).ToList();
+                    view.StatusTypes = (await codeRepo.FindAllByCategory(CodeCategory.STATUS)).ToList();
                     return View("Create", view);
                 }
             }

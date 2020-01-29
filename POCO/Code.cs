@@ -4,9 +4,11 @@
 ******************************************************************************************************/
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 using Microsoft.Extensions.Logging;
 using CodesTable.Data;
@@ -17,7 +19,6 @@ namespace CodesTable.Data.POCO
 
     public class Code
     {
-
         public PrimaryKey PK { get; set; }
         public int Id
         {
